@@ -2,6 +2,58 @@
 # vbaProject-Compiler
 Create a vbaProject.bin file from VBA source files.
 
+## Quick Start with Builder Helper
+
+The easiest way to build a VBA project is using the `builder` module, which automatically discovers and loads VBA files from a structured directory.
+
+For detailed documentation, see [Builder Helper Feature Documentation](docs/FEATURE_BUILDER.md).
+
+```python
+from vbaProjectCompiler.builder import build_from_directory
+
+# Build a project from a directory structure
+project = build_from_directory("my_vba_project")
+
+# Once OleFile is implemented, you'll be able to write the bin file:
+# from vbaProjectCompiler.ole_file import OleFile
+# ole_file = OleFile(project)
+# ole_file.writeFile("vbaProject.bin")
+```
+
+### Expected Directory Structure
+
+The builder expects your VBA source files to be organized in the following structure:
+
+```
+my_vba_project/
+├── Modules/        # Standard modules (.bas files)
+│   ├── Module1.bas
+│   └── Module2.bas
+├── ClassModules/   # Class modules (.cls files)
+│   └── MyClass.cls
+├── Objects/        # Document modules (.cls files) like ThisWorkbook, Sheet1
+│   ├── ThisWorkbook.cls
+│   └── Sheet1.cls
+└── Forms/          # Form modules (.frm files)
+    └── UserForm1.frm
+```
+
+### Alternative: Build from File Dictionary
+
+If you prefer more control or have a different file structure, you can use `create_project_from_files`:
+
+```python
+from vbaProjectCompiler.builder import create_project_from_files
+
+files = {
+    'modules': ['path/to/Module1.bas', 'path/to/Module2.bas'],
+    'doc_modules': ['path/to/ThisWorkbook.cls', 'path/to/Sheet1.cls'],
+    'class_modules': ['path/to/MyClass.cls'],
+    'forms': ['path/to/UserForm1.frm']
+}
+
+project = create_project_from_files(files)
+```
 
 ## VBAProject Class
 
