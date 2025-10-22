@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="vbaProjectCompiler",
-    packages=['vbaProjectCompiler'],
-    tests_require=['pytest'],
+    packages=find_packages(),
+    tests_require=["pytest"],
 )
