@@ -22,7 +22,7 @@ classifiers = [
 "Bug Tracker" = "https://github.com/Beakerboy/vbaProject-Compiler/issues"
 
 [tool.pytest.ini_options]
-pythonpath = "src"
+pythonpath = "."
 testpaths = [
     "tests",
 ]

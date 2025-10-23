@@ -2,6 +2,21 @@
 # vbaProject-Compiler
 Create a vbaProject.bin file from VBA source files.
 
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+For development (includes testing tools):
+
+```bash
+pip install -r requirements_dev.txt
+pip install -e .
+```
+
+**Note:** The `OleFile` class is provided by the [MS-CFB](https://github.com/Beakerboy/MS-CFB) package (dev branch), which handles the OLE/CFB file format. This is automatically installed via requirements.txt.
+
 ## Quick Start with Builder Helper
 
 The easiest way to build a VBA project is using the `builder` module, which automatically discovers and loads VBA files from a structured directory.
@@ -14,10 +29,10 @@ from vbaProjectCompiler.builder import build_from_directory
 # Build a project from a directory structure
 project = build_from_directory("my_vba_project")
 
-# Once OleFile is implemented, you'll be able to write the bin file:
-# from vbaProjectCompiler.ole_file import OleFile
-# ole_file = OleFile(project)
-# ole_file.writeFile("vbaProject.bin")
+# Write the vbaProject.bin file using OleFile from MS-CFB package
+from ms_cfb import OleFile  # Note: OleFile is in the MS-CFB package
+ole_file = OleFile(project)
+ole_file.writeFile("vbaProject.bin")
 ```
 
 ### Expected Directory Structure
@@ -59,9 +74,11 @@ project = create_project_from_files(files)
 
 The vbaProject class contains all the data and metadata that will be used to create the OLE container.
 
+**Note:** The `OleFile` class is provided by the separate [MS-CFB](https://github.com/Beakerboy/MS-CFB) package.
+
 ```python
 from vbaProjectCompiler.vbaProject import VbaProject
-from vbaProjectCompiler.ole_file import OleFile
+from ms_cfb import OleFile  # OleFile is in the MS-CFB package
 
 
 project = VbaProject()
@@ -92,7 +109,9 @@ project.addReference(oleReference)
 
 ## oleFile Class
 
-Users should not have to interact with the oleFile class. It's job is to extract the data from the vbaProject and turn it into a valid file. This includes deciding which data stream appears where, and applying different views to the models to save the data in the correct formats.
+**Note:** The `OleFile` class is implemented in the separate [MS-CFB](https://github.com/Beakerboy/MS-CFB) package, not in MS-OVBA.
+
+Users should not have to interact with the oleFile class directly. Its job is to extract the data from the vbaProject and turn it into a valid file. This includes deciding which data stream appears where, and applying different views to the models to save the data in the correct formats.
 
 The oleFIle has two parts, a header and a FAT Sector Chain. This FAT chain stores multiple streams of data:
 * Fat Chain Stream
