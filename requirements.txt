@@ -1,4 +1,4 @@
 ms_ovba_compression
 ms_ovba_crypto
-git+https://github.com/Beakerboy/MS-CFB@dev
-git+https://github.com/Beakerboy/MS-Pcode-Assembler@dev
+git+https://github.com/James-McNeil/MS-CFB@main
+git+https://github.com/James-McNeil/MS-Pcode-Assembler@main

@@ -16,6 +16,23 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "ms_ovba_compression",
+  "ms_ovba_crypto",
+  "ms_cfb @ git+https://github.com/James-McNeil/MS-CFB@main",
+  "ms_pcode_assembler @ git+https://github.com/James-McNeil/MS-Pcode-Assembler@main"
+]
+
+[project.optional-dependencies]
+tests = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+  "flake8>=6.0",
+  "flake8-annotations",
+  "mypy",
+  "pep8-naming",
+  "coveralls>=3.0",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/Beakerboy/vbaProject-Compiler"
